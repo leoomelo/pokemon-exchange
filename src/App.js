@@ -75,8 +75,9 @@ function App() {
         </ul>
       </div>
       <div className="is-fair-change">
-        { isFairExchange(getTotalBaseExperienceByPlayer(selectedPokemonsPlayer1), getTotalBaseExperienceByPlayer(selectedPokemonsPlayer2))
-          && <div>FAIR EXCHANGE</div>
+        { (isFairExchange(getTotalBaseExperienceByPlayer(selectedPokemonsPlayer1), getTotalBaseExperienceByPlayer(selectedPokemonsPlayer2)) &&
+          (selectedPokemonsPlayer1.length !== 0 && selectedPokemonsPlayer2.length !== 0)) &&
+          <div>FAIR EXCHANGE</div>
         }
       </div>
     </div>
