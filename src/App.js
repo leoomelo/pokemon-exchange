@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import './App.css';
 import PokeCombo from './components/PokeCombo'
@@ -80,6 +81,26 @@ function App() {
           <div>FAIR EXCHANGE</div>
         }
       </div>
+      <button onClick={() => {
+          axios.post('http://localhost:5000/fairExchange', {
+            pointsPlayer1: 100,
+            pointsPlayer2: 80,
+            isFairExchange: true,
+            date: new Date()
+          },
+          {
+          headers: {
+            'Content-Type': 'application/json'
+          }})
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        }}>
+          Click
+        </button>
     </div>
   );
 }
