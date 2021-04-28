@@ -20,6 +20,7 @@ function Game() {
       }
     })
     setSelectedPokemonsPlayer1([...selectedPokemonsPlayer1, pokemon])
+    totalPlayer1 += getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1)
   };
   
   function refreshBaseExperiencePlayer2 (pokemon) {
@@ -29,6 +30,7 @@ function Game() {
       }
     })
     setSelectedPokemonsPlayer2([...selectedPokemonsPlayer2, pokemon])
+    totalPlayer2 += getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer2)
   };
 
   function getTotalBaseExperienceByPlayer1 (pokemonsByPlayer) {
@@ -76,7 +78,7 @@ function Game() {
         <PokeCombo comboNumber={12} refreshBaseExperience={refreshBaseExperiencePlayer2} />
       </div>
       <div className="is-fair-change">
-        { (isFairExchange(totalPlayer1, totalPlayer2) &&
+        { (isFairExchange(getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1), getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer2)) &&
           (selectedPokemonsPlayer1.length !== 0 && selectedPokemonsPlayer2.length !== 0)) &&
           <div>FAIR EXCHANGE</div>
         }
@@ -105,7 +107,7 @@ function Game() {
             pointsPlayer1: totalPlayer1,
             pokeSelectedPlayer2: selectedPokemonsPlayer2,
             pointsPlayer2: totalPlayer2,
-            isFairExchange: true,
+            isFairExchange: isFairExchange(totalPlayer1, totalPlayer2),
             date: DateTime.now().setLocale('pt-BR').toLocaleString(DateTime.DATETIME_SHORT)
           },
           {
@@ -120,7 +122,10 @@ function Game() {
           });
         }}>
           Save Exchange
-        </button>
+      </button>
+      <div>
+        <p className="reminder">* Fair Exchange = Difference less than 100 pts.</p>
+      </div>
     </div>
     </>
   )
