@@ -11,10 +11,10 @@ function extractPokemonsFromExchange(pokemons) {
 }
 
 function compareByDate( a, b ) {
-  if ( a.date < b.date ){
+  if ( a.date > b.date ){
     return -1;
   }
-  if ( a.date > b.date ){
+  if ( a.date < b.date ){
     return 1;
   }
   return 0;
@@ -50,7 +50,7 @@ function History() {
         <tbody>
         {exchanges.length > 0 &&
         exchanges.map((item, index) => ( 
-          <tr>
+          <tr key={index}>
             <th scope="row">{index + 1}</th>
             <td>{extractPokemonsFromExchange(item.pokeSelectedPlayer1)}</td>
             <td>{item.pointsPlayer1}</td>
