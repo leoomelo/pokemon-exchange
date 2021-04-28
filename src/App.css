@@ -78,3 +78,14 @@ ul {
 .is-fair-change {
   background-color: aliceblue;
 }
+
+.history {
+  color: whitesmoke;
+}
+
+.table-details {
+  color: #4292C6;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
