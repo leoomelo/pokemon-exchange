@@ -25,6 +25,15 @@ async function findPokemonById (id) {
   return await axios.get(URL)
 }
 
+function buildPokemonSkeleton() {
+  return {
+    data: {
+      base_experience : 0,
+      name: ''
+    }
+  }
+}
+
 function PokeCombo( {comboNumber, refreshBaseExperience} ) {
   const [pokemonSelected, setPokemonSelected] = useState([])
   
@@ -36,14 +45,19 @@ function PokeCombo( {comboNumber, refreshBaseExperience} ) {
         name="pokemons"
         id="pokemons" 
         onChange={async (item) => {
-          setPokemonSelected(item.target.value)
-          const pokemon = await findPokemonById(item.target.value)
-          const baseExperience = pokemon.data.base_experience
-          refreshBaseExperience({
-            name: pokemon.data.name, 
-            baseExperience: baseExperience,
-            comboNumber: comboNumber
-          })
+          if (item.target.value === -1) {
+            refreshBaseExperience({ value: item.target.value })
+          } else {
+            setPokemonSelected(item.target.value)
+            const pokemon = item.target.value !== '-1' ? await findPokemonById(item.target.value) : buildPokemonSkeleton()
+            const baseExperience = pokemon.data.base_experience
+            refreshBaseExperience({
+              name: pokemon.data.name,
+              baseExperience: baseExperience,
+              comboNumber: comboNumber,
+              value: item.target.value
+            })
+          }
         }}>
         <option value="-1">Selecione um pokemon:</option>
         {Pokemons.results.map((item) => (

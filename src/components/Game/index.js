@@ -14,11 +14,14 @@ function Game() {
   const [selectedPokemonsPlayer2, setSelectedPokemonsPlayer2] = useState([])
   
   function refreshBaseExperiencePlayer1 (pokemon) {
+    console.log('pokemon: ', pokemon.value)
     selectedPokemonsPlayer1.forEach((selectedPokemon, index) => {
+      console.log('DENTRO DO FOREACH')
       if (selectedPokemon.comboNumber === pokemon.comboNumber) {
         selectedPokemonsPlayer1.splice(index, 1);
       }
     })
+    console.log('ANTES DO SELECTED')
     setSelectedPokemonsPlayer1([...selectedPokemonsPlayer1, pokemon])
     totalPlayer1 += getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1)
   };
@@ -88,7 +91,7 @@ function Game() {
           <p>Total: {getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1)}</p>
           <ul>
             {selectedPokemonsPlayer1.map((item) => (
-            <li key={item.comboNumber}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)} = {item.baseExperience}</li>
+            item.name && <li key={item.comboNumber}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)} = {item.baseExperience}</li>
             ))}
           </ul>
         </div>
@@ -96,7 +99,7 @@ function Game() {
           <p>Total: {getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer2)}</p>
           <ul>
             {selectedPokemonsPlayer2.map((item) => (
-            <li key={item.comboNumber}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)} = {item.baseExperience}</li>
+            item.name && <li key={item.comboNumber}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)} = {item.baseExperience}</li>
             ))}
           </ul>
         </div>
