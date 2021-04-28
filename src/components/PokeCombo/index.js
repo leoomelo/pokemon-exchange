@@ -32,7 +32,8 @@ function PokeCombo( {comboNumber, refreshBaseExperience} ) {
   
   return(
     <div className="card-combo">
-      <select name="pokemons"
+      <select
+        name="pokemons"
         id="pokemons" 
         onChange={async (item) => {
           setPokemonSelected(item.target.value)

@@ -17,14 +17,16 @@ function App() {
       <div>
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/history">History</Link>
-              </li>
-            </ul>
+            <div className="menu">
+              <ul className="nav nav-pills">
+                <li className="nav-item p-2">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="nav-item p-2">
+                  <Link to="/history">History</Link>
+                </li>
+              </ul>
+            </div>
             <Switch>
               <Route path="/history">
                 <History />
