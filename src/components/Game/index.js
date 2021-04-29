@@ -14,14 +14,11 @@ function Game() {
   const [selectedPokemonsPlayer2, setSelectedPokemonsPlayer2] = useState([])
   
   function refreshBaseExperiencePlayer1 (pokemon) {
-    console.log('pokemon: ', pokemon.value)
     selectedPokemonsPlayer1.forEach((selectedPokemon, index) => {
-      console.log('DENTRO DO FOREACH')
       if (selectedPokemon.comboNumber === pokemon.comboNumber) {
         selectedPokemonsPlayer1.splice(index, 1);
       }
     })
-    console.log('ANTES DO SELECTED')
     setSelectedPokemonsPlayer1([...selectedPokemonsPlayer1, pokemon])
     totalPlayer1 += getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1)
   };
