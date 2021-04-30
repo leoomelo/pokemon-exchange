@@ -4,9 +4,6 @@ import { DateTime } from 'luxon'
 import PokeCombo from '../PokeCombo/'
 import '../../App.css';
 
-let totalPlayer1 = 0
-let totalPlayer2 = 0
-
 function Game() {
   const IS_FAIR_VALUE = 100
 
@@ -20,7 +17,6 @@ function Game() {
       }
     })
     setSelectedPokemonsPlayer1([...selectedPokemonsPlayer1, pokemon])
-    totalPlayer1 += getTotalBaseExperienceByPlayer1(selectedPokemonsPlayer1)
   };
   
   function refreshBaseExperiencePlayer2 (pokemon) {
@@ -30,7 +26,6 @@ function Game() {
       }
     })
     setSelectedPokemonsPlayer2([...selectedPokemonsPlayer2, pokemon])
-    totalPlayer2 += getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer2)
   };
 
   function getTotalBaseExperienceByPlayer1 (pokemonsByPlayer) {
@@ -38,7 +33,7 @@ function Game() {
     for (const pokemon of pokemonsByPlayer) {
       baseExperienceTotal += pokemon.baseExperience
     }
-    totalPlayer1 = baseExperienceTotal
+    
     return baseExperienceTotal
   }
 
@@ -47,7 +42,7 @@ function Game() {
     for (const pokemon of pokemonsByPlayer) {
       baseExperienceTotal += pokemon.baseExperience
     }
-    totalPlayer2 = baseExperienceTotal
+    
     return baseExperienceTotal
   }
 
@@ -102,6 +97,9 @@ function Game() {
         </div>
       </div>
       <button className="btn btn-primary w-100" onClick={() => {
+          const totalPlayer1 = getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer1)
+          const totalPlayer2 = getTotalBaseExperienceByPlayer2(selectedPokemonsPlayer2)
+
           axios.post('http://localhost:5000/fairExchange', {
             pokeSelectedPlayer1: selectedPokemonsPlayer1,
             pointsPlayer1: totalPlayer1,
